@@ -10,7 +10,8 @@ class NeuralNet
   def initialize
 
     @config = Neuralnet_configurer.new
-    yield(@config)
+    yield(@config.data)
+    @config.set_defaults
     @config = @config.data
 
     unless @config.inputs && @config.outputs
@@ -18,7 +19,7 @@ class NeuralNet
     end
 
     if @config.type == :sse
-      @kernel = Neuralnet_SSE(@config.inputs, @config.hidden, @config.outputs)
+      @kernel = Neuralnet_SSE.new(@config.inputs, @config.hidden, @config.outputs)
     else
       raise 'invalid type'
     end
@@ -37,6 +38,7 @@ class NeuralNet
     if block_given?
       yield(data)
     end
+    return data
   end
 
 end

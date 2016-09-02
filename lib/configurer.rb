@@ -4,23 +4,22 @@ using MonkeyType
 
 Neuralnet_config = Struct.new( :type,
                                :inputs,
-                               :ouputs,
+                               :outputs,
                                :hidden)
 class Neuralnet_configurer
   attr_reader :data
 
   def initialize
     @data = Neuralnet_config.new
-    set_defaults
   end
 
   def set_defaults
-    @data.type ||= :sse
-    @data.hidden ||= (inputs + outputs)/2
-
-    @data.type.is String
     @data.inputs.is Numeric
-    @data.hidden.is Numeric
     @data.outputs.is Numeric
+
+    @data.type ||= :sse
+    @data.hidden ||= (@data.inputs + @data.outputs)/2
+
+    @data.hidden.is Numeric
   end
 end

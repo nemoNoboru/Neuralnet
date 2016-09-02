@@ -29,7 +29,7 @@ class Neuralnet_SSE
     init_layer = @num_inputs * @hidden_size
     hidden_layer = @hidden_size * @hidden_size
     output_layer = @hidden_size * @num_outputs
-    self.load_gnoma(Array.new(init_layer+hidden_layer+output_layer){ rand })
+    self.load_gnoma(Array.new(init_layer+hidden_layer+output_layer+1){ rand })
   end
 
   def load_gnoma(gnoma)
@@ -66,7 +66,7 @@ class Neuralnet_SSE
     n = activate(initialMatrix * @init )
     n = activate(n * @hidden )
     n = activate(n * @end )
-    return processData(n.get_data)
+    return (n.get_data)
   end
 
   def activate(matrix)
