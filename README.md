@@ -1,4 +1,4 @@
-# Neuralnet
+# Neuralnet [![Build Status](https://travis-ci.org/nemoNoboru/Neuralnet.svg?branch=master)](https://travis-ci.org/nemoNoboru/Neuralnet)
 Simple, powerfull, robust and easy to use neural network implementation on ruby
 
 # WIP
@@ -7,7 +7,7 @@ Simple, powerfull, robust and easy to use neural network implementation on ruby
 - [x] Write tests
 - [ ] Add reproduction to NeuralNets
 - [ ] Find a better name
-- [ ] set-up travis CI
+- [x] set-up travis CI
 - [ ] Code loading and saving system
 - [ ] Write documentation
 - [ ] Publish to rubygems
