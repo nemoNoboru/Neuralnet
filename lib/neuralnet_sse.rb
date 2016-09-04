@@ -52,7 +52,9 @@ class Neuralnet_SSE
 
   def process(params)
     params.is Array
-
+    unless @init && @hidden && @end
+      raise 'Error. load from file or call random before processing'
+    end
     initial_matrix = VectorSSE::Matrix.new(VectorSSE::Type::F32, 1, @num_inputs, params)
     n = activate(initial_matrix * @init)
     n = activate(n * @hidden)

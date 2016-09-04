@@ -35,6 +35,16 @@ class NeuralnetTest < Minitest::Test
     assert t
   end
 
+  def test_process_should_error
+    assert_raises(RuntimeError) do
+      t = NeuralNet.new do |config|
+        config.inputs = 3
+        config.outputs = 1
+      end
+      t.process([0.1, 0.2, 0.3])
+    end
+  end
+
   def test_processing
     t = NeuralNet.new do |config|
       config.inputs = 30
