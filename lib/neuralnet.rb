@@ -6,9 +6,7 @@ require 'monkey_type'
 using MonkeyType
 
 class NeuralNet
-
   def initialize
-
     @config = Neuralnet_configurer.new
     yield(@config.data)
     @config.set_defaults
@@ -23,22 +21,50 @@ class NeuralNet
     else
       raise 'invalid type'
     end
-
   end
 
-  def method_missing( name, *args, &block )
+  def method_missing(name, *args, &block)
     @kernel.send(name, *args, &block)
   end
 
-  def process( list )
+  def process(list)
     list.is Array
 
     data = @kernel.process(list)
 
-    if block_given?
-      yield(data)
-    end
-    return data
+    yield(data) if block_given?
+    data
   end
 
+  def mix(neural)
+    neural.is NeuralNet
+
+    index = 0
+    new_genoma = []
+    gnoma1 = self.gnoma
+    gnoma2 = neural.gnoma
+
+    gnoma1.each do
+      t = if rand >= 0.5
+            gnoma1[index]
+          else
+            gnoma2[index]
+          end
+      new_genoma << t
+      index += 1
+    end
+    mutate(new_genoma)
+  end
+
+  def mutate(a)
+    count = 0
+    a.map do |i|
+      if rand < 1.0 / a.size
+        ((0.7 * i) + (rand * 0.3))
+        count += 1
+      else
+        i
+      end
+    end
+  end
 end
