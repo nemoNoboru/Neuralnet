@@ -5,7 +5,7 @@ Simple, powerfull, robust and easy to use neural network implementation on ruby
 
 # TO DO
 - [x] Write tests
-- [ ] Add reproduction to NeuralNets
+- [x] Add reproduction to NeuralNets
 - [ ] Find a better name
 - [x] set-up travis CI
 - [ ] Code loading and saving system
