@@ -7,10 +7,9 @@ using MonkeyType
 
 class NeuralNet
   def initialize
-    @config = Neuralnet_configurer.new
-    yield(@config.data)
+    @config = NeuralnetConfig.new
+    yield(@config)
     @config.set_defaults
-    @config = @config.data
 
     unless @config.inputs && @config.outputs
       raise 'you must specify at least the numbers of inputs and outputs'
