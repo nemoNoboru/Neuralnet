@@ -62,14 +62,16 @@ class NeuralnetTest < Minitest::Test
   end
 
   def test_mixing
-    neurals = []
-
-    6.times do
-      neurals << NeuralNet.new do |c|
-        c.inputs = 3
-        c.outputs = 5
-      end
+    n1 = NeuralNet.new do |config|
+      config.inputs = 3
+      config.outputs = 4
     end
-    neurals.pop.mix(neurals.pop) until neurals.empty?
+    n1.random
+
+    n2 = NeuralNet.new(n1.config)
+    n2.random
+
+    neurals = Array.new(4) { n1.mix n2 }
+    assert neurals[0]
   end
 end

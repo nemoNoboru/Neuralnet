@@ -6,10 +6,16 @@ require 'monkey_type'
 using MonkeyType
 
 class NeuralNet
-  def initialize
-    @config = NeuralnetConfig.new
-    yield(@config)
-    @config.set_defaults
+  attr_reader :config # or create method #clone
+
+  def initialize(*config)
+    if config[0] == nil
+      @config = NeuralnetConfig.new
+      yield(@config)
+      @config.set_defaults
+    else
+      @config = config[0]
+    end
 
     unless @config.inputs && @config.outputs
       raise 'you must specify at least the numbers of inputs and outputs'
@@ -52,8 +58,12 @@ class NeuralNet
       new_genoma << t
       index += 1
     end
-    mutate(new_genoma)
+    gen = mutate(new_genoma)
+    new_neural = NeuralNet.new(@config)
+    new_neural.load_gnoma(gen)
+    return new_neural
   end
+  contract :mix, NeuralNet
 
   def mutate(a)
     count = 0
